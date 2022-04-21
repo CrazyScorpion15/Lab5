@@ -15,9 +15,14 @@ namespace Laboratorio5.Models
         [Required]
         public string Propietario { get; set; }
         [Required]
-        public float Longitud { get; set; }
+        public double Longitud { get; set; }
         [Required]
-        public float Latitud { get; set; }
+        public double Latitud { get; set; }
 
+        public static bool Save(VehiculosModel model)
+        {
+
+            return true;
+        }
     }
 }
