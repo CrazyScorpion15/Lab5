@@ -93,7 +93,59 @@ namespace Laboratorio5.Arbol2_3
                 }
             }
         }
+        private void Split(Nodo<K, V> actual)
+        {
+            if (Padre != null)
+            {
 
+            }
+            else
+            {
+                if (TipoNodo)
+                {
+                    int index = Nodosmaximos / 2;
+                    Nodo<K, V> izquierda = new Nodo<K, V>(Nodosminimos, Nodosmaximos,TipoNodo, numeros);
+                    Nodo<K, V> derecha = new Nodo<K, V>(Nodosminimos, Nodosmaximos,TipoNodo,);
+
+                    TipoNodo = false;
+
+                    int borrar_llave = 0;
+                    for (int i = 0; i < index; i++)
+                    {
+                        izquierda.Insert(Ks[i], Vs[i]);
+                        izquierda.CantidadNodos++;
+                        borrar_llave++;
+                    }
+
+                    while (borrar_llave > 0)
+                    {
+                        Ks.RemoveAt(0);
+                        Vs.RemoveAt(0);
+                        borrar_llave--;
+                    }
+
+                    for (int i = 1; i < index; i++)
+                    {
+                        derecha.Insert(Ks[i], Vs[i]);
+                        derecha.CantidadNodos++;
+                        borrar_llave++;
+                    }
+
+                    while (borrar_llave > 0)
+                    {
+                        Ks.RemoveAt(1);
+                        Vs.RemoveAt(1);
+                        borrar_llave--;
+                    }
+
+                    Hijos.Insert(0, izquierda);
+                    Hijos.Insert(1, derecha);
+                    izquierda.Padre = this;
+                    derecha.Padre = this;
+                    CantidadNodos = 1;
+                }
+            }
+        }
     }
 
 }
