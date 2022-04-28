@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Laboratorio5.Models
 {
-    public class VehiculosModel
+    public class VehiculosModel: IComparable
     {
         [Required]
         public int Placas { get; set; }
@@ -24,5 +24,18 @@ namespace Laboratorio5.Models
 
             return true;
         }
+
+        public int CompareTo(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Comparison<VehiculosModel> Comparer = delegate (VehiculosModel Vehi1, VehiculosModel vehi2)
+        {
+            return Vehi1.Placas.CompareTo(vehi2.Placas);
+        };
+
+
+
     }
 }

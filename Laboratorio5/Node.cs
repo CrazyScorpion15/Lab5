@@ -12,5 +12,7 @@ namespace Laboratorio5
         public Node<T> nodo;
         public Node<T> izq;
         public Node<T> der;
+        public Node<T> sizq;
+        public Node<T> sder;
     }
 }

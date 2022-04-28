@@ -10,7 +10,9 @@ namespace Laboratorio5.Helpers
     public class Data
     {
         private static Data _instance = null;
+        public List<VehiculosModel> ListaVehi;
         public BTree<VehiculosModel> Arbol = new BTree<VehiculosModel>();
+
         public static Data Instance
         {
             get

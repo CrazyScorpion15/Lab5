@@ -58,7 +58,8 @@ namespace Laboratorio5.Controllers
                 while (csv.Read())
                 {
                     var lista = csv.GetRecord<VehiculosModel>();
-                    //Data.Instance.Lista.Insertar(lista, Comparar.CompEmail);
+                    Data.Instance.ListaVehi.Add(lista);
+                    Data.Instance.Arbol.Agregar(lista, lista.Comparer);
                 }
             }
             #endregion
