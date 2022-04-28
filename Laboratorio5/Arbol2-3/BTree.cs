@@ -9,7 +9,7 @@ namespace Laboratorio5.Arbol2_3
 {
     public class BTree<T> : IEnumerable<T>, IEnumerable
     {
-
+       
         readonly Nodo<T> NPadre = new Nodo<T>();
 
 
@@ -90,6 +90,8 @@ namespace Laboratorio5.Arbol2_3
         }
 
         //last commit dia entrega
+            
+             
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
             throw new NotImplementedException();

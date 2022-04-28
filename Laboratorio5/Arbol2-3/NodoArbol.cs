@@ -7,12 +7,11 @@ namespace Laboratorio5.Arbol2_3
 {
     public class NodoArbol<T>
     {
-        public NodoArbol<T> Padre { get; set; }
-        public List<NodoArbol<T>> Hijo { get; set; }
+        public int[] Key { get; set; }
         public T value { get; set; }
-        public int MaxNode { get; set; }
-        public int MinNode { get; set; }
-        public int CantNode { get; set; }
-        public bool Size { get; set; }
+        public int t { get; set; }
+        public int numKey { get; set; }
+        public bool leaf { get; set; }
+        public NodoArbol<T>[] Child { get; set; }
     }
 }
