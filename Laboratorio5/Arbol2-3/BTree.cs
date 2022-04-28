@@ -89,7 +89,7 @@ namespace Laboratorio5.Arbol2_3
             }
         }
 
-        //last commit
+        //last commit dia entrega
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
             throw new NotImplementedException();
