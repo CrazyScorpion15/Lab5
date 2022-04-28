@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Laboratorio5.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace Laboratorio5.Models
 
         public static bool Save(VehiculosModel model)
         {
-
+            Data.Instance.Arbol.Agregar(model, model.Comparer);
             return true;
         }
 
