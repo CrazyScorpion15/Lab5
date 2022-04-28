@@ -30,6 +30,9 @@ namespace Laboratorio5
             }
         }
 
-
+        internal bool DynamicInvoke<T>(T valor1, T valor2)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

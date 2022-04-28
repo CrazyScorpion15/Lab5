@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Laboratorio5.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +8,7 @@ using CsvHelper.Configuration.Attributes;
 
 namespace Laboratorio5.Models
 {
-    public class VehiculosModel
+    public class VehiculosModel: IComparable
     {
         [Required]
         [Index(0)]
@@ -27,8 +28,21 @@ namespace Laboratorio5.Models
 
         public static bool Save(VehiculosModel model)
         {
-
+            Data.Instance.Arbol.Agregar(model, model.Comparer);
             return true;
         }
+
+        public int CompareTo(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Comparison<VehiculosModel> Comparer = delegate (VehiculosModel Vehi1, VehiculosModel vehi2)
+        {
+            return Vehi1.Placas.CompareTo(vehi2.Placas);
+        };
+
+
+
     }
 }

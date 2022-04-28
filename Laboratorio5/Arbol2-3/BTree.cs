@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Laboratorio5.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,41 +9,89 @@ namespace Laboratorio5.Arbol2_3
 {
     public class BTree<T> : IEnumerable<T>, IEnumerable
     {
-        NodoArbol<T> raiz;
-        int t;
-        public BTree(int _t)
-        {
-            raiz = null;
-            t = _t;
-        }
-        public BTree(int t1, bool leaf1)
-        {
-            t = t1;
-            raiz.leaf = leaf1;
+       
+        readonly Nodo<T> NPadre = new Nodo<T>();
 
-            raiz.Key = new int[2 * t-1];
-            raiz.Child = new NodoArbol<T>[2 * t];
 
-            raiz.numKey = 0;
-        }
-        public void Insertar(int k, T value)
+        public void Agregar(T valor, Delegate delegado)
         {
-            if(raiz == null)
+            Insertar(NPadre, valor, delegado);
+        }
+
+        void Insertar(Nodo<T> padre, T valor, Delegate delegado)
+        {
+            if (padre.valor == null)
             {
-                //raiz = new BTree(t, true);
-                raiz.Key[0] = k;
-                raiz.numKey = 1;
-                raiz.value = value;
+                padre.valor = valor;
+
+                padre.Izq = new Nodo<T>();
+                padre.Der = new Nodo<T>();
+                padre.ArbolDer = new Nodo<T>();
+                padre.Izq = new Nodo<T>();
+
             }
-            else
+            else if (padre.ArbolIzq.valor == null && Convert.ToInt32(delegado.DynamicInvoke(valor, padre.valor)) == -1)
             {
-                if(raiz.numKey == 2*t-1)
+                if (padre.Izq.valor != null)
                 {
-                    //BTree<T> s = new BTree(t, false);
+                    padre.Der.valor = padre.valor;
 
+                    if (Convert.ToInt32(delegado.DynamicInvoke(valor, padre.Der.valor)) == -1)
+                    {
+                        padre.valor = valor;
+                    }
+                    else
+                    {
+                        padre.valor = padre.Izq.valor;
+                        padre.Izq.valor = valor;
+                    }
                 }
             }
+            else if (padre.ArbolDer.valor == null && Convert.ToInt32(delegado.DynamicInvoke(valor, padre.valor)) == -1)
+            {
+                if (padre.Der.valor != null)
+                {
+                    padre.Izq.valor = padre.valor;
+
+                    if (Convert.ToInt32(delegado.DynamicInvoke(valor, padre.Der.valor)) == -1)
+                    {
+                        padre.valor = valor;
+                    }
+                    else
+                    {
+                        padre.valor = padre.Der.valor;
+                        padre.Der.valor = valor;
+                    }
+                }
+            }
+            else if (Convert.ToInt32(delegado.DynamicInvoke(valor, padre.valor)) == -1)
+            {
+                Insertar(padre.ArbolIzq, valor, delegado);
+                split(padre.ArbolIzq, padre.Izq);
+            }
+            else if (Convert.ToInt32(delegado.DynamicInvoke(valor, padre.valor)) == -1)
+            {
+                Insertar(padre.ArbolDer, valor, delegado);
+                split(padre.ArbolDer, padre.Der);
+            }           
+ 
         }
+
+        void split(Nodo<T> mid, Nodo<T> padre)
+        {
+            if (mid.Izq.valor != null && mid.valor  != null && mid.Der.valor != null)
+            {
+                padre.valor = mid.valor;
+                mid.valor = default;
+
+                padre.ArbolDer = mid.Der;
+                padre.ArbolIzq = mid.Izq;
+            }
+        }
+
+        //last commit dia entrega
+            
+             
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
             throw new NotImplementedException();
