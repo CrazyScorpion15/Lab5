@@ -6,11 +6,11 @@ using System.Text;
 
 public delegate K GetKeyDelegate<K, V>(V value);
 
-public delegate int CompareKeyDelegate<K>(K key1, K key2);
+public delegate int CompareKeysDelegate<K>(K key1, K key2);
 
 namespace Laboratorio5
 {
-    interface DostresTree <K, V>
+    interface DosTres<K, V>
     {
         void Insert(K key, V value);
 
@@ -19,9 +19,13 @@ namespace Laboratorio5
         V Delete(K key);
 
         V[] GetList();
+        /*
+        void InOrder(ITreeTraversal<V> traversal);
 
-        //void Traversal(TreeTraversal<V> trasversal);
+        void PreOrder(ITreeTraversal<V> traversal);
 
+        void PostOrder(ITreeTraversal<V> traversal);
+        */
         bool IsEmpty();
 
         int Count();
